@@ -1,0 +1,25 @@
+name: EvolutionHigh Android build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Export Android APK
+        run: |
+          mkdir -p build
+          godot --headless --verbose --export-debug "Android" build/EvolutionHigh.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: EvolutionHigh-Android
+          path: build/EvolutionHigh.apk
+          if-no-files-found: error
