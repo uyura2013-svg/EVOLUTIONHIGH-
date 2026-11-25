@@ -39,6 +39,14 @@ jobs:
           export/android/android_sdk_path = "/usr/lib/android-sdk"
           EOF
 
+      - name: Install Android SDK platform and build tools
+        shell: bash
+        run: |
+          set -euxo pipefail
+          SDKMANAGER="/usr/lib/android-sdk/cmdline-tools/latest/bin/sdkmanager"
+          "$SDKMANAGER" --sdk_root=/usr/lib/android-sdk --licenses </dev/null || true
+          "$SDKMANAGER" --sdk_root=/usr/lib/android-sdk "platforms;android-34" "build-tools;34.0.0"
+
       - name: Validate and export Android APK
         shell: bash
         run: |
