@@ -46,7 +46,7 @@ jobs:
           set -euxo pipefail
           SDKMANAGER="/usr/lib/android-sdk/cmdline-tools/latest/bin/sdkmanager"
           "$SDKMANAGER" --sdk_root=/usr/lib/android-sdk --licenses </dev/null || true
-          "$SDKMANAGER" --sdk_root=/usr/lib/android-sdk "platforms;android-34" "build-tools;34.0.0"
+          "$SDKMANAGER" --sdk_root=/usr/lib/android-sdk "platforms;android-35" "build-tools;35.0.0" "platform-tools"
 
       - name: Validate and export Android APK
         shell: bash
