@@ -44,8 +44,12 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p build
-          godot --headless --editor --path . --quit
-          godot --headless --path . --export-debug "Android" build/EvolutionHigh.apk
+          echo "=== Android SDK contents ==="
+          ls -la /usr/lib/android-sdk || true
+          find /usr/lib/android-sdk -maxdepth 3 -type d 2>/dev/null | head -80 || true
+          command -v sdkmanager || true
+          godot --headless --verbose --editor --path . --quit
+          godot --headless --verbose --path . --export-debug "Android" build/EvolutionHigh.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
